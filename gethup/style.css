@@ -1,0 +1,49 @@
+/* CSS */
+:root{
+  --purple-1:#6633FF;
+  --purple-2:#7D38B3;
+  --accent:#77FF00;
+  --card-bg: #ffffff;
+  --card-text:#2d3748;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0;font-family: system-ui,-apple-system,'Segoe UI', Roboto,"Cairo",sans-serif;direction:rtl}
+.page{min-height:100vh;background: linear-gradient(135deg,#f7f5ff 0%, #efe8ff 40%, #e9dcff 100%);color:var(--card-text);display:flex;flex-direction:column;align-items:stretch;}
+.site-header{display:flex;flex-direction:column;align-items:center;padding:28px 16px 8px;}
+.logo{width:110px;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(102,51,255,0.08);background:linear-gradient(135deg,rgba(102,51,255,0.04),rgba(125,56,179,0.02));}
+.brand-small{color:var(--purple-1);font-weight:700;margin-top:8px;opacity:0.95;}
+.brand-title{margin:6px 0 0;font-size:22px;color:var(--purple-1);font-weight:800}
+
+/* Tabs */
+.tabs{display:flex;gap:12px;justify-content:center;padding:18px;width:100%;max-width:1200px;margin:8px auto;}
+.tab{background:rgba(255,255,255,0.95);border-radius:28px;padding:10px 26px;border:2px solid rgba(102,51,255,0.12);cursor:pointer;font-weight:700;color:var(--purple-1);transition:all .22s;box-shadow:0 6px 20px rgba(102,51,255,0.06)}
+.tab:hover{transform:translateY(-3px)}
+.tab.active{background: linear-gradient(90deg,var(--purple-1),var(--purple-2)); color:#fff; box-shadow:0 12px 30px rgba(102,51,255,0.14); border-color: transparent}
+
+/* Cards grid */
+main{flex:1; width:100%; display:flex; justify-content:center;}
+.cards-grid{width:100%;max-width:1200px;padding:26px; display:grid; grid-template-columns: repeat(2, minmax(300px,1fr)); gap:22px;align-items:start}
+
+/* Card style (Canva-like) */
+.card{background:var(--card-bg);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(15,15,25,0.06);overflow:hidden;display:flex;flex-direction:column;transition:transform .28s,box-shadow .28s;text-align:right}
+.card:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(102,51,255,0.12)}
+.card .img-wrap{width:100%;height:200px;overflow:hidden;border-radius:12px;margin-bottom:14px;background:#f0f0f4;display:flex;align-items:center;justify-content:center}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card h3{margin:6px 0;color:var(--purple-1);font-size:1.05rem;font-weight:800}
+.card p{margin:0;color:#5b6070;line-height:1.5;font-size:0.95rem}
+.card .cta{margin-top:14px;display:block;text-decoration:none;background: linear-gradient(90deg,#25D366,#128C7E);color:#fff;padding:10px 14px;border-radius:12px;font-weight:800;text-align:center}
+
+/* Footer whatsapp floating (optional) */
+.whatsapp-fixed{position:fixed;left:18px;bottom:18px;background:linear-gradient(90deg,#25D366,#128C7E);color:#fff;padding:12px 16px;border-radius:999px;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,0.18);font-weight:800}
+
+/* Responsive */
+@media (max-width: 900px){
+  .cards-grid{grid-template-columns: repeat(2, minmax(240px,1fr));padding:18px;gap:18px}
+}
+@media (max-width: 700px){
+  .tabs{padding:10px;gap:8px}
+  .cards-grid{grid-template-columns: 1fr;padding:14px}
+  .card .img-wrap{height:160px}
+  .logo{width:90px}
+}
