@@ -1,36 +1,225 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">     <title>منيو خدمات شامي ميديا</title>
-    <link rel="stylesheet" href="./style.css">
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منيو خدمات شامي ميديا</title>
+    <style>
+        :root{
+            --purple-1:#6633FF;
+            --purple-2:#7D38B3;
+            --accent:#77FF00;
+            --card-bg: #ffffff;
+            --card-text:#2d3748;
+        }
 
-  <body>
-    <div class="page">
-      <header class="site-header">
-                <img class="logo" src="https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/logo.png" alt="شامي ميديا">
-        <div class="brand">
-          <div class="brand-small">شامي ميديا</div>
-          <h1 class="brand-title">منيو خدمات شامي ميديا</h1>
-        </div>
-      </header>
+        *{box-sizing:border-box}
+        html,body{height:100%;margin:0;padding:0;font-family: system-ui,-apple-system,'Segoe UI', Roboto,"Cairo",sans-serif;direction:rtl}
+        .page{min-height:100vh;background: linear-gradient(135deg,#f7f5ff 0%, #efe8ff 40%, #e9dcff 100%);color:var(--card-text);display:flex;flex-direction:column;align-items:stretch;}
+        .site-header{display:flex;flex-direction:column;align-items:center;padding:28px 16px 8px;}
+        .logo{width:110px;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(102,51,255,0.08);background:linear-gradient(135deg,rgba(102,51,255,0.04),rgba(125,56,179,0.02));}
+        .brand-small{color:var(--purple-1);font-weight:700;margin-top:8px;opacity:0.95;}
+        .brand-title{margin:6px 0 0;font-size:22px;color:var(--purple-1);font-weight:800}
 
-      <nav class="tabs" role="tablist" aria-label="أقسام المنيو">
-                <button class="tab active" data-cat="medical">🏥 خدمات القطاع الطبي</button>
-        <button class="tab" data-cat="commercial">🏢 خدمات القطاع التجاري</button>
-        <button class="tab" data-cat="educational">🎓 خدمات القطاع التعليمي</button>
-      </nav>
+        /* Tabs */
+        .tabs{display:flex;gap:12px;justify-content:center;padding:18px;width:100%;max-width:1200px;margin:8px auto;}
+        .tab{background:rgba(255,255,255,0.95);border-radius:28px;padding:10px 26px;border:2px solid rgba(102,51,255,0.12);cursor:pointer;font-weight:700;color:var(--purple-1);transition:all .22s;box-shadow:0 6px 20px rgba(102,51,255,0.06)}
+        .tab:hover{transform:translateY(-3px)}
+        .tab.active{background: linear-gradient(90deg,var(--purple-1),var(--purple-2)); color:#fff; box-shadow:0 12px 30px rgba(102,51,255,0.14); border-color: transparent}
 
-      <main>
-        <section id="cards-grid" class="cards-grid" aria-live="polite"></section>
-      </main>
+        /* Cards grid */
+        main{flex:1; width:100%; display:flex; justify-content:center;}
+        .cards-grid{width:100%;max-width:1200px;padding:26px; display:grid; grid-template-columns: repeat(2, minmax(300px,1fr)); gap:22px;align-items:start}
 
-      <footer class="site-footer">
-        <a class="whatsapp-fixed" href="https://wa.me/201006404614" target="_blank" rel="noopener">📱 تواصل عبر واتساب</a>
-      </footer>
-    </div>
+        /* Card style */
+        .card{background:var(--card-bg);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(15,15,25,0.06);overflow:hidden;display:flex;flex-direction:column;transition:transform .28s,box-shadow .28s;text-align:right}
+        .card:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(102,51,255,0.12)}
+        .card .img-wrap{width:100%;height:200px;overflow:hidden;border-radius:12px;margin-bottom:14px;background:#f0f0f4;display:flex;align-items:center;justify-content:center}
+        .card img{width:100%;height:100%;object-fit:cover;display:block}
+        .card h3{margin:6px 0;color:var(--purple-1);font-size:1.05rem;font-weight:800}
+        .card p{margin:0;color:#5b6070;line-height:1.5;font-size:0.95rem}
+        .card .cta{margin-top:14px;display:block;text-decoration:none;background: linear-gradient(90deg,#25D366,#128C7E);color:#fff;padding:10px 14px;border-radius:12px;font-weight:800;text-align:center}
 
-    <script src="./script.js"></script>
-  </body>
+        /* Footer whatsapp floating */
+        .whatsapp-fixed{position:fixed;left:18px;bottom:18px;background:linear-gradient(90deg,#25D366,#128C7E);color:#fff;padding:12px 16px;border-radius:999px;text-decoration:none;box-shadow:0 12px 30px rgba(0,0,0,0.18);font-weight:800}
+
+        /* Responsive */
+        @media (max-width: 900px){
+            .cards-grid{grid-template-columns: repeat(2, minmax(240px,1fr));padding:18px;gap:18px}
+        }
+        @media (max-width: 700px){
+            .tabs{padding:10px;gap:8px}
+            .cards-grid{grid-template-columns: 1fr;padding:14px}
+            .card .img-wrap{height:160px}
+            .logo{width:90px}
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <header class="site-header">
+            <img class="logo" src="https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/logo.png" alt="شامي ميديا">
+            <div class="brand">
+                <div class="brand-small">شامي ميديا</div>
+                <h1 class="brand-title">منيو خدمات شامي ميديا</h1>
+            </div>
+        </header>
+
+        <nav class="tabs" role="tablist" aria-label="أقسام المنيو">
+            <button class="tab active" data-cat="medical">🏥 خدمات القطاع الطبي</button>
+            <button class="tab" data-cat="commercial">🏢 خدمات القطاع التجاري</button>
+            <button class="tab" data-cat="educational">🎓 خدمات القطاع التعليمي</button>
+        </nav>
+
+        <main>
+            <section id="cards-grid" class="cards-grid" aria-live="polite"></section>
+        </main>
+
+        <footer class="site-footer">
+            <a class="whatsapp-fixed" href="https://wa.me/201006404614" target="_blank" rel="noopener">📱 تواصل عبر واتساب</a>
+        </footer>
+    </div>
+
+    <script>
+        const servicesData = {
+            medical: [
+                {
+                    title: "🎨 هوية بصرية طبية",
+                    desc: "شعار وتصميم يعكس ثقة مرضاك ومصداقية عيادتك",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/medical%20brand%20identity%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "🖨️ كروت وبروشورات طبية",
+                    desc: "كروت أعمال وبروشورات توعوية بجودة عالية",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/medical%20prints%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "📱 إدارة السوشيال ميديا",
+                    desc: "حملات ومحتوى طبي يبني ثقة ويجذب مرضى جدد",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/medical%20social%20media%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "🎬 فيديوهات توعوية",
+                    desc: "محتوى فيديو قصير يثقف جمهورك ويزيد التفاعل",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/medical%20videos%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "🪧 يافطات وبانرات",
+                    desc: "تصميم رول أب وبنرات يعزز حضورك المحلي",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/medical%20banner%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "📲 كود QR طبي",
+                    desc: "كود QR لحجز المواعيد ومشاركة بيانات العيادة بسهولة",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/medical%20qr%20code%201200w%20x%20800h.jpg"
+                }
+            ],
+            commercial: [
+                {
+                    title: "🎨 لوجو وهوية بصرية مميزة",
+                    desc: "هوية كاملة تميّز علامتك التجارية",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/commerial%20brand%20identity%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "📲 منيو إلكتروني QR Code",
+                    desc: "منيو عصري يسهل الطلب على عملائك",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/commerial%20qr%20code%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "🖨️ مطبوعات المطاعم والمحلات",
+                    desc: "قوائم، فلايرات، مواد مطبوعة بجودة عالية",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/commerial%20prints%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "🛍️ استيكر وشنط مطبوعة",
+                    desc: "منتجات مطبوعة ترفع قيمة البراند",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/commerial%20sticker%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "🪧 رول أب ويافطات إعلانية",
+                    desc: "لافتات جذابة للمتاجر والمعارض",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/commerial%20banners%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "📱 إدارة السوشيال ميديا",
+                    desc: "محتوى تسويقي يعزز مبيعاتك",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/commerial%20social%20media%201200w%20x%20800h.jpg"
+                }
+            ],
+            educational: [
+                {
+                    title: "🎨 هوية بصرية تعليمية",
+                    desc: "هوية تعكس تميز مؤسستك التعليمية",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/education%20identity%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "📚 كتابة مذكرات تعليمية",
+                    desc: "مذكرات رياضيات وكيمياء مبسطة وسهلة الفهم",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/education%20write%20sheets.jpg"
+                },
+                {
+                    title: "🖨️ طباعة مذكرات",
+                    desc: "طباعة عالية الجودة بأسعار مناسبة للمدارس",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/education%20print%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "💻 تحويل رقمي للنصوص",
+                    desc: "تحويل الكتابة اليدوية إلى Word أو PDF بدقة",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/education%20handwrite%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "❓ بنك أسئلة وإجابات",
+                    desc: "بنك أسئلة مع إجابات نموذجية لجميع المواد",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/education%20exams%201200w%20x%20800h.jpg"
+                },
+                {
+                    title: "📱 إدارة السوشيال ميديا",
+                    desc: "محتوى تعليمي جذاب لطلاب وأولياء الأمور",
+                    img: "https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/education%20social%20media%201200w%20x%20800h.jpg"
+                }
+            ]
+        };
+
+        // DOM refs
+        const grid = document.getElementById('cards-grid');
+        const tabs = document.querySelectorAll('.tab');
+
+        // render function
+        function renderCategory(cat){
+            grid.innerHTML = ''; // clear
+            const list = servicesData[cat] || [];
+            list.forEach(item => {
+                const card = document.createElement('article');
+                card.className = 'card';
+                // تم التأكد من بناء البطاقة بشكل صحيح لمنع تكرار النصوص
+                card.innerHTML = `
+                    <div class="img-wrap">
+                        <img src="${item.img}" alt="${item.title}" loading="lazy"
+                            onerror="this.closest('.img-wrap').innerHTML='<div style=\\"padding:24px;color:#bdbdd0\\">صورة غير متاحة</div>'">
+                    </div>
+                    <h3>${item.title}</h3>
+                    <p>${item.desc}</p>
+                    <a class="cta" href="https://wa.me/201006404614?text=${encodeURIComponent(item.title)}"
+                        target="_blank" rel="noopener">اطلب استشارة عبر واتساب</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // tabs events
+        tabs.forEach(t => {
+            t.addEventListener('click', (e) => {
+                tabs.forEach(x=>x.classList.remove('active'));
+                t.classList.add('active');
+                const cat = t.dataset.cat || t.getAttribute('data-cat');
+                renderCategory(cat);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // init
+        renderCategory('medical');
+    </script>
+</body>
 </html>
