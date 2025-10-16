@@ -1,40 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8">
-    <title>shamy menu</title>
+    <title>منيو خدمات شامي ميديا</title>
     <link rel="stylesheet" href="./style.css">
-
   </head>
-    
+
   <body>
-  <!-- HTML -->
-<div class="page">
-  <header class="site-header">
-    <img class="logo" src="https://drive.google.com/uc?export=view&id=15KB_5uCpekZ8B10GX7_z6t9UFTe0FD5L" alt="شامي ميديا">
-    <div class="brand">
-      <div class="brand-small">شامي ميديا</div>
-      <h1 class="brand-title">منيو خدمات شامي ميديا</h1>
+    <div class="page">
+      <header class="site-header">
+        <img class="logo" src="https://github.com/ShamyMedia/Shamy-Menu/blob/main/images/logo.png?raw=true" alt="شامي ميديا">
+        <div class="brand">
+          <div class="brand-small">شامي ميديا</div>
+          <h1 class="brand-title">منيو خدمات شامي ميديا</h1>
+        </div>
+      </header>
+
+      <nav class="tabs" role="tablist" aria-label="أقسام المنيو">
+        <button class="tab active" data-cat="medical">🏥 خدمات القطاع الطبي</button>
+        <button class="tab" data-cat="commercial">🏢 خدمات القطاع التجاري</button>
+        <button class="tab" data-cat="educational">🎓 خدمات القطاع التعليمي</button>
+      </nav>
+
+      <main>
+        <section id="cards-grid" class="cards-grid" aria-live="polite"></section>
+      </main>
+
+      <footer class="site-footer">
+        <a class="whatsapp-fixed" href="https://wa.me/201006404614" target="_blank" rel="noopener">📱 تواصل عبر واتساب</a>
+      </footer>
     </div>
-  </header>
 
-  <nav class="tabs" role="tablist" aria-label="أقسام المنيو">
-    <button class="tab active" data-cat="medical">🏥 خدمات القطاع الطبي</button>
-    <button class="tab" data-cat="commercial">🏢 خدمات القطاع التجاري</button>
-    <button class="tab" data-cat="educational">🎓 خدمات القطاع التعليمي</button>
-  </nav>
-
-  <main>
-    <section id="cards-grid" class="cards-grid" aria-live="polite"></section>
-  </main>
-
-  <footer class="site-footer">
-    <a class="whatsapp-fixed" href="https://wa.me/00201006404614" target="_blank" rel="noopener">📱 تواصل عبر واتساب</a>
-  </footer>
-</div>
-    <script  src="./script.js"></script>
-
+    <script src="./script.js"></script>
   </body>
-  
 </html>
