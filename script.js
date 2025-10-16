@@ -1,5 +1,5 @@
 /* JS */
-// بيانات الخدمات ( export=view)
+// بيانات الخدمات (محدثة بالصور اللي بعتهالك بصيغة export=view)
 const servicesData = {
   medical: [
     {
@@ -114,7 +114,7 @@ function renderCategory(cat){
       <div class="img-wrap"><img src="${item.img}" alt="${item.title}" loading="lazy" onerror="this.closest('.img-wrap').innerHTML = '<div style=\"padding:24px;color:#bdbdd0\">صورة غير متاحة</div>'"></div>
       <h3>${item.title}</h3>
       <p>${item.desc}</p>
-      <a class="cta" href="https://wa.me/201006404614?text=${encodeURIComponent(item.title)}" target="_blank" rel="noopener">اطلب استشارة عبر واتساب</a>
+      <a class="cta" href="https://wa.me/00201006404614?text=${encodeURIComponent(item.title)}" target="_blank" rel="noopener">اطلب استشارة عبر واتساب</a>
     `;
     grid.appendChild(card);
   });
