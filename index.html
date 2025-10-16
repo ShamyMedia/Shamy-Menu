@@ -35,7 +35,7 @@
         .card{background:var(--card-bg);border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(15,15,25,0.06);overflow:hidden;display:flex;flex-direction:column;transition:transform .28s,box-shadow .28s;text-align:right}
         .card:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(102,51,255,0.12)}
         .card .img-wrap{width:100%;height:200px;overflow:hidden;border-radius:12px;margin-bottom:14px;background:#f0f0f4;display:flex;align-items:center;justify-content:center}
-        .card img{width:100%;height:100%;object-fit:cover;display:block}
+        .card img{width:100%;height:100%;object-fit:contain;display:block} /* 👈 تم التعديل هنا: object-fit: contain */
         .card h3{margin:6px 0;color:var(--purple-1);font-size:1.05rem;font-weight:800}
         .card p{margin:0;color:#5b6070;line-height:1.5;font-size:0.95rem}
         .card .cta{margin-top:14px;display:block;text-decoration:none;background: linear-gradient(90deg,#25D366,#128C7E);color:#fff;padding:10px 14px;border-radius:12px;font-weight:800;text-align:center}
@@ -187,16 +187,15 @@
 
         // render function
         function renderCategory(cat){
-            grid.innerHTML = ''; // clear
+            grid.innerHTML = '';
             const list = servicesData[cat] || [];
             list.forEach(item => {
                 const card = document.createElement('article');
                 card.className = 'card';
-                // تم التأكد من بناء البطاقة بشكل صحيح لمنع تكرار النصوص
+                // تم إزالة جزء onerror بالكامل
                 card.innerHTML = `
                     <div class="img-wrap">
-                        <img src="${item.img}" alt="${item.title}" loading="lazy"
-                            onerror="this.closest('.img-wrap').innerHTML='<div style=\\"padding:24px;color:#bdbdd0\\">صورة غير متاحة</div>'">
+                        <img src="${item.img}" alt="${item.title}" loading="lazy">
                     </div>
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
@@ -212,13 +211,16 @@
             t.addEventListener('click', (e) => {
                 tabs.forEach(x=>x.classList.remove('active'));
                 t.classList.add('active');
+                
                 const cat = t.dataset.cat || t.getAttribute('data-cat');
                 renderCategory(cat);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // الانتقال لأعلى الصفحة (أفضل بدون تأثير smooth لضمان التوافق)
+                window.scrollTo(0, 0); 
             });
         });
 
-        // init
+        // init: تشغيل الفئة الطبية عند التحميل
         renderCategory('medical');
     </script>
 </body>
