@@ -2,12 +2,12 @@
 const servicesData = {
   medical: [
     {
-      title: "🎨 هوية طبية",
+      title: "🎨 هوية بصرية طبية",
       desc: "شعار وتصميم يعكس ثقة مرضاك ومصداقية عيادتك",
       img: "https://github.com/ShamyMedia/ShamyMenu/blob/main/images/medical%20brand%20identity%201200w%20x%20800h.jpg?raw=true"
     },
     {
-      title: "🖨️ كروت وبروشورات",
+      title: "🖨️ كروت وبروشورات طبية",
       desc: "كروت أعمال وبروشورات توعوية بجودة عالية",
       img: "https://github.com/ShamyMedia/Shamy-Menu/blob/main/images/medical%20prints%201200w%20x%20800h.jpg?raw=true"
     },
@@ -66,8 +66,13 @@ const servicesData = {
   ],
   educational: [
     {
+      title: "🎨 هوية بصرية تعليمية",
+      desc: "هوية تعكس تميز مؤسستك التعليمية",
+      img: "https://github.com/ShamyMedia/Shamy-Menu/blob/main/images/education%20identity%201200w%20x%20800h.jpg?raw=true"
+    },
+    {
       title: "📚 كتابة مذكرات تعليمية",
-      desc: "مذكرات تعليمية مبسطة وسهلة الفهم",
+      desc: "مذكرات رياضيات وكيمياء مبسطة وسهلة الفهم",
       img: "https://github.com/ShamyMedia/Shamy-Menu/blob/main/images/education%20write%20sheets.jpg?raw=true"
     },
     {
@@ -83,7 +88,7 @@ const servicesData = {
     {
       title: "❓ بنك أسئلة وإجابات",
       desc: "بنك أسئلة مع إجابات نموذجية لجميع المواد",
-      img: "https://github.com/ShamyMedia/Shamy-Menu/blob/main/images/education%20exams%201200w%20x%20800h.jpg?raw=true"
+      img: "https://github.com/ShamyMedia/Shamy-Menu/blob main/images/education%20exams%201200w%20x%20800h.jpg?raw=true"
     },
     {
       title: "📱 إدارة السوشيال ميديا",
@@ -93,11 +98,12 @@ const servicesData = {
   ]
 };
 
+// DOM refs
 const grid = document.getElementById('cards-grid');
 const tabs = document.querySelectorAll('.tab');
 
-function renderCategory(cat) {
-  grid.innerHTML = '';
+function renderCategory(cat){
+  grid.innerHTML = ''; // clear
   const list = servicesData[cat] || [];
   list.forEach(item => {
     const card = document.createElement('article');
@@ -112,13 +118,16 @@ function renderCategory(cat) {
   });
 }
 
+// tabs events
 tabs.forEach(t => {
-  t.addEventListener('click', () => {
-    tabs.forEach(x => x.classList.remove('active'));
+  t.addEventListener('click', (e) => {
+    tabs.forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
-    renderCategory(t.dataset.cat);
+    const cat = t.dataset.cat || t.getAttribute('data-cat');
+    renderCategory(cat);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
 
+// init
 renderCategory('medical');
